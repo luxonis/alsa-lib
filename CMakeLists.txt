@@ -29,3 +29,5 @@ add_custom_target(clean-makefile
 
 # Specify what CMake's 'clean' command should do
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES clean-makefile)
+
+install(CODE "execute_process(COMMAND ${CMAKE_MAKE_PROGRAM} install -C ${CMAKE_SOURCE_DIR})")
