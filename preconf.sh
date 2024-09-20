@@ -1,9 +1,12 @@
+PREFIX=$1
+
 libtoolize --force --copy --automake
 aclocal
 autoheader
 automake --foreign --copy --add-missing
 autoconf
-mkdir -p build
-cd build
-CFLAGS="-O2 -Wall -W -Wunused-const-variable=0 -pipe -g" ../configure
-cd ..
+mkdir -p build/autotools
+cd build/autotools
+echo "Install path set to $PREFIX"
+../../configure --prefix=$PREFIX
+cd ../..
