@@ -33,3 +33,17 @@ add_custom_target(clean-makefile
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES clean-makefile)
 
 install(CODE "execute_process(COMMAND ${CMAKE_MAKE_PROGRAM} install -C ${CMAKE_SOURCE_DIR}/build/autotools)")
+
+# Generate the MyLibraryConfig.cmake file
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+    ${CMAKE_SOURCE_DIR}/AlsaConfig.cmake.in  # Input template
+    ${CMAKE_BINARY_DIR}/AlsaConfig.cmake           # Output file
+    INSTALL_DESTINATION ${CMAKE_ROOT}/alsa         # Where to install
+)
+
+# Install the MyLibraryConfig.cmake file
+install(FILES
+    ${CMAKE_BINARY_DIR}/AlsaConfig.cmake
+    DESTINATION ${CMAKE_ROOT}/alsa
+)
